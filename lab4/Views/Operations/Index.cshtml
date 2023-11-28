@@ -1,0 +1,86 @@
+﻿@model IEnumerable<lab4.Operation>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Depositdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Returndate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Depositamount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Refundamount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Returnstamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deposit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emploee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Investors)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Depositdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Returndate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Depositamount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Refundamount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Returnstamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deposit.Id)
+            </td>
+            <td>
+                    @{
+                        var fullName = (item.Emploee != null) ? $"{item.Emploee.Surname} {item.Emploee.Name} {item.Emploee.Middlename}" : "N/A";
+                    }
+
+                    @Html.DisplayFor(modelItem => fullName)
+            </td>
+                <td>
+                    @{
+                        var fullName1 = (item.Investors != null) ? $"{item.Investors.Surname} {item.Investors.Name} {item.Investors.Middlename}" : "N/A";
+                    }
+
+                    @Html.DisplayFor(modelItem => fullName1)
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
